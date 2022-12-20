@@ -4,13 +4,13 @@ terraform {
     random = {
       source  = "hashicorp/random"
       version = "~> 3.4"
+    }
 
     google = {
       source  = "hashicorp/google"
       version = "~> 4.46"
     }
 
-    }
   }
   required_version = "~> 1.3"
 }
