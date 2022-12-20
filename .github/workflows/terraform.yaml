@@ -13,9 +13,6 @@ jobs:
     defaults:
       run:
         working-directory: terraform
-      env:
-        TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
-        TF_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
 
 
     steps:
@@ -47,6 +44,9 @@ jobs:
         run: terraform fmt -check
 
       - name: Terraform Init
+        env:
+          TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
+          TF_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
         id: init
         run: terraform init
 
@@ -55,6 +55,9 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan
+        env:
+          TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
+          TF_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
@@ -123,5 +126,8 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
+        env:
+          TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
+          TF_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
