@@ -52,7 +52,7 @@ jobs:
           terraform {
             cloud {
               organization = "${{ secrets.TF_CLOUD_ORGANIZATION }}"
-              workspace {
+              workspaces {
                 name = "${{ secrets.TF_CLOUD_WORKSPACE }}"
               }
             }
