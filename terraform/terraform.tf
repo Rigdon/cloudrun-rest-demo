@@ -5,10 +5,10 @@ terraform {
       source  = "hashicorp/random"
       version = "~> 3.4"
 
-    google = {
-      source = "hashicorp/google"
-      version = "~> 4.46"
-    }
+      google = {
+        source  = "hashicorp/google"
+        version = "~> 4.46"
+      }
 
     }
   }
@@ -18,17 +18,17 @@ terraform {
 provider "random" {}
 
 variable "gcp_project" {
-  type = string
+  type        = string
   description = "Project name in GCP"
 }
 
 variable "gcp_default_region" {
-  type = string
+  type        = string
   description = "Default region for GCP resources"
 }
 
 variable "gcp_default_zone" {
-  type = string
+  type        = string
   description = "Default zone for GCP resources"
 }
 
