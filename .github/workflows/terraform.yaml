@@ -42,24 +42,10 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
-      - name: Setup Terraform Backend
+      - name: Terraform Init
         env:
           TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
-          TF_CLOUD_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
-        id: backend
-        run: |
-          cat > backend.tf << EOF
-          terraform {
-            cloud {
-              organization = "${{ secrets.TF_CLOUD_ORGANIZATION }}"
-              workspaces {
-                name = "${{ secrets.TF_CLOUD_WORKSPACE }}"
-              }
-            }
-          }
-          EOF
-
-      - name: Terraform Init
+          TF_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
         id: init
         run: terraform init
 
