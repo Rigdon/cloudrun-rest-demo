@@ -5,10 +5,10 @@ terraform {
       source  = "hashicorp/random"
       version = "~> 3.4"
 
-      google = {
-        source  = "hashicorp/google"
-        version = "~> 4.46"
-      }
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.46"
+    }
 
     }
   }
