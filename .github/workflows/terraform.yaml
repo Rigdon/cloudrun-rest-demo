@@ -22,7 +22,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
         with:
-          terraform_version: 1.3
+#          terraform_version: 1.3
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Config Terraform plugin cache
@@ -42,10 +42,24 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
-      - name: Terraform Init
+      - name: Setup Terraform Backend
         env:
           TF_CLOUD_ORGANIZATION: ${{ secrets.TF_CLOUD_ORGANIZATION }}
           TF_CLOUD_WORKSPACE: ${{ secrets.TF_CLOUD_WORKSPACE }}
+        id: backend
+        run: |
+          cat > backend.tf << EOF
+          terraform {
+            cloud {
+              organization = "${{ secrets.TF_CLOUD_ORGANIZATION }}"
+              workspace {
+                name = "${{ secrets.TF_CLOUD_WORKSPACE }}"
+              }
+            }
+          }
+          EOF
+
+      - name: Terraform Init
         id: init
         run: terraform init
 
