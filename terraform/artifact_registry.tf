@@ -4,7 +4,6 @@ variable "gcp_github_sa_name" {
 }
 
 resource "google_artifact_registry_repository" "app_repo" {
-#  provider = google-beta
   location      = var.gcp_default_region
   project       = var.gcp_project
   repository_id = local.app_name
