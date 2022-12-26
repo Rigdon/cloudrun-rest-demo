@@ -20,16 +20,19 @@ provider "random" {}
 variable "gcp_project" {
   type        = string
   description = "Project name in GCP"
+  sensitive   = true
 }
 
 variable "gcp_default_region" {
   type        = string
   description = "Default region for GCP resources"
+  sensitive   = true
 }
 
 variable "gcp_default_zone" {
   type        = string
   description = "Default zone for GCP resources"
+  sensitive   = true
 }
 
 provider "google" {
